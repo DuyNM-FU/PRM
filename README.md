@@ -23,12 +23,15 @@ ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nh
     git merge main
 ```
 
+**#Sau khi push**
+- Thông báo để được review code và accept merge.
+
+**#Package**
+- Nếu Activity nào có từ 2 JavaClass trở lên thì phải tạo package để chứa các JavaClass đó
+
 **#Đặt tên ID**
 - Khi tạo các thành phần trong layout cần nhớ đặt ID.
 - Đặt tên ID ngắn gọn dễ hiểu. VD: Tạo Button có chức năng log in và đặt ID là btn_login, ListView món ăn đặt là lv_foods,...
 - Khi design xong layout bất kỳ, phải khai báo các thành phần trong Java Activity tương ứng.
-
-**#Sau khi push**
-- Thông báo để được review code và accept merge.
 
 **#Sử dụng ***dp*** làm đơn vị tiêu chuẩn**
