@@ -24,3 +24,5 @@ ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nh
 ```
 **#Sau khi push**
 - Thông báo để được review code và accept merge.
+**#Các thông số ảnh và cỡ chữ**
+- Sử dụng ***dp*** làm đơn vị
