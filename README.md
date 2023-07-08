@@ -3,7 +3,7 @@
 **#Create git repository**
  - Khi đã clone project thì set up repo:
 ```
-git remote add origin https://github.com/DuyNM-FU/PRM_SWD.git
+git remote add origin https://github.com/DuyNM-FU/PRM.git
 ```
  - Bắt buộc phải checkout ra nhánh riêng. Không được code trên MAIN/MASTER
  - Đặt tên nhánh theo tên của mình. VD: DuyNM.
