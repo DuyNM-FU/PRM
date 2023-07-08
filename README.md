@@ -33,4 +33,4 @@ ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nh
 - Khi tạo các thành phần trong layout cần nhớ đặt ID.
 - Đặt tên ID ngắn gọn dễ hiểu. VD: Tạo Button có chức năng log in và đặt ID là btn_login, ListView món ăn đặt là lv_foods,...
 - Khi design xong layout bất kỳ, phải khai báo các thành phần trong Java Activity tương ứng.
->>>>>>> 44717eabe3f9748a63d0c8b99d54efa9c77d9350
+**#Sử dụng ***dp*** làm đơn vị tiêu chuẩn**
