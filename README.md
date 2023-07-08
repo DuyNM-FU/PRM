@@ -24,3 +24,7 @@ ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nh
 ```
 **#Sau khi push**
 - Thông báo để được review code và accept merge.
+**#Đặt tên ID**
+- Khi tạo các thành phần trong layout cần nhớ đặt ID.
+- Đặt tên ID ngắn gọn dễ hiểu. VD: Tạo Button có chức năng log in và đặt ID là btn_login, ListView món ăn đặt là lv_foods,...
+- Khi design xong layout bất kỳ, phải khai báo các thành phần trong Java Activity tương ứng.
