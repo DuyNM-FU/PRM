@@ -13,7 +13,7 @@ git checkout -b <branch_name>
 **#PULL & PUSH**
 - Trước khi bắt đầu code và trước khi push code phải pull code về để tránh xóa code, mất code
  ```
-git pull main origin
+git pull origin
 ```
 ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nhánh của bạn để tránh việc mất code.___
  - Push code:
