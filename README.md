@@ -32,3 +32,6 @@ ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nh
 - Thông báo để được review code và accept merge.
 
 **#Sử dụng ***dp*** làm đơn vị tiêu chuẩn**
+
+**#Thư viện bên ngoài đã dùng**
+- [Scroll Date Picker](https://github.com/GastricSpark/ScrollDatePicker)
