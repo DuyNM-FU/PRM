@@ -35,3 +35,6 @@ ___Nếu xảy ra conflict thì so sánh code kĩ càng trên nhánh MAIN và nh
 - Khi design xong layout bất kỳ, phải khai báo các thành phần trong Java Activity tương ứng.
 
 **#Sử dụng ***dp*** làm đơn vị tiêu chuẩn**
+
+**#Thư viện bên ngoài đã dùng**
+- [Scroll Date Picker](https://github.com/GastricSpark/ScrollDatePicker)
