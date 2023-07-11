@@ -16,6 +16,12 @@
 <!--        Activity for view own reservations-->
         <activity android:name=".view_your_reservation.ViewYourReservationActivity"/>
         <activity
+            android:name=".TableReservationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

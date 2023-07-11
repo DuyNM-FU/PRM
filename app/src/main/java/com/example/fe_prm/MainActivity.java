@@ -2,8 +2,6 @@ package com.example.fe_prm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -28,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
         google_button = (SignInButton) findViewById(R.id.google_button);
 
         tv_booknow.setText("Tired of having to wait?\nMake a reservation right away.");
-        google_button.setOnClickListener(v->{
-            startActivity(new Intent(this, ViewYourReservationActivity.class));
+
+        google_button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
         });
     }
 
