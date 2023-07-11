@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, HomePage.class);
             startActivity(intent);
         });
+//          --Change to Quang view--
+//        google_button.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ViewYourReservationActivity.class);
+//            startActivity(intent);
+//        });
     }
 
 }
