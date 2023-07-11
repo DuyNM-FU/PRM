@@ -57,24 +57,16 @@ public class ViewYourReservationActivity extends AppCompatActivity {
     }
     public void renderRecyclerView(){
         reservationDtos = new ArrayList<>();
-//        reservationDtos.add(new ReservationInformationDto(1,"Quang","January 7, 2023", "8:00 PM",
-//                10, 2, true, "BD415C512"));
-//        reservationDtos.add(new ReservationInformationDto(1,"Toan","January 9, 2023", "7:00 PM",
-//                4, 6, true, "BD415C512"));
-//        reservationDtos.add(new ReservationInformationDto(1,"Quang","February 12, 2023", "8:00 PM",
-//                11, 3, true, "BD415C512"));
-//        reservationDtos.add(new ReservationInformationDto(1,"Quang","January 7, 2023", "9:00 PM",
-//                4, 7, true, "AG125151S"));
         adapter = new ReservationRecycleViewAdapter(reservationDtos, this);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.scrollToPositionWithOffset(2,20);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (adapter.getItemCount() > 0) {
             reservationTitleText.setText("Your reservations");
         } else reservationTitleText.setText("No Reservation yet");
-
-
+        loadReservation();
+    }
+    public void loadReservation(){
         Call<ReservationInformationDto[]> call = ReservationRepository.getReservationService().getHistory(MainActivity.AUTORIZATION_KEY);
         Loading.setLoading(this,true);
         call.enqueue(new Callback<ReservationInformationDto[]>() {
@@ -83,20 +75,17 @@ public class ViewYourReservationActivity extends AppCompatActivity {
                 ReservationInformationDto[] dtos = response.body();
                 Log.d("TAG", "onResponse: OK " + response.body() + " dto: " + dtos.length);
                 if (dtos != null)
-                for (ReservationInformationDto dto:
-                        dtos) {
+                    for (ReservationInformationDto dto:
+                            dtos) {
                         reservationDtos.add(dto);
                         adapter.notifyDataSetChanged();
-                    reservationTitleText.setText("Your reservations");
-
-                } else {
+                        reservationTitleText.setText("Your reservations");
+                    } else {
                     Toast.makeText(ViewYourReservationActivity.this,
                             "Load okey but ...", Toast.LENGTH_SHORT).show();
-
                 }
                 Loading.setLoading(ViewYourReservationActivity.this,false);
             }
-
             @Override
             public void onFailure(Call<ReservationInformationDto[]> call, Throwable t) {
                 Toast.makeText(ViewYourReservationActivity.this, "Failed to load", Toast.LENGTH_SHORT).show();
