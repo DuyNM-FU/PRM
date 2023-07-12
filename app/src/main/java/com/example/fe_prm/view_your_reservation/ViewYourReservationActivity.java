@@ -1,0 +1,121 @@
+package com.example.fe_prm.view_your_reservation;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.fe_prm.HomePage;
+import com.example.fe_prm.Loading;
+import com.example.fe_prm.MainActivity;
+import com.example.fe_prm.R;
+import com.example.fe_prm.view_your_reservation.adapter.ReservationRecycleViewAdapter;
+import com.example.fe_prm.view_your_reservation.api.ReservationRepository;
+import com.example.fe_prm.view_your_reservation.dto.ReservationInformationDto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ViewYourReservationActivity extends AppCompatActivity {
+    List<ReservationInformationDto> reservationDtos;
+    //list of reservations
+    RecyclerView recyclerView;
+
+    //on toolbar text
+    TextView userTitleText, userNameText;
+    ImageView backButton, viewMapButton, viewNotificationButton;
+    CircleImageView userAvatar;
+
+    //on Reservation textview
+    TextView reservationHelloText,reservationTitleText; //before RecyclerView
+    ImageView addButton;
+    ReservationRecycleViewAdapter adapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_your_reservation);
+        init();
+        renderRecyclerView();
+        setListener();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            recyclerView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+                recyclerView.setMinimumHeight(500);
+            });
+        }
+    }
+    public void setListener(){
+        backButton.setOnClickListener(v->{
+            startActivity(new Intent(this, MainActivity.class));
+        });
+    }
+    public void renderRecyclerView(){
+        reservationDtos = new ArrayList<>();
+        adapter = new ReservationRecycleViewAdapter(reservationDtos, this);
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        if (adapter.getItemCount() > 0) {
+            reservationTitleText.setText("Your reservations");
+        } else reservationTitleText.setText("No Reservation yet");
+        loadReservation();
+    }
+    public void loadReservation(){
+        Call<ReservationInformationDto[]> call = ReservationRepository.getReservationService().getHistory(MainActivity.AUTORIZATION_KEY);
+        Loading.setLoading(this,true);
+        call.enqueue(new Callback<ReservationInformationDto[]>() {
+            @Override
+            public void onResponse(Call<ReservationInformationDto[]> call, Response<ReservationInformationDto[]> response) {
+                ReservationInformationDto[] dtos = response.body();
+                if (dtos != null)
+                    for (ReservationInformationDto dto:
+                            dtos) {
+                        reservationDtos.add(dto);
+                        adapter.notifyDataSetChanged();
+                        reservationTitleText.setText("Your reservations");
+                    } else
+                        if (response.code() == 401){
+                    Toast.makeText(ViewYourReservationActivity.this,
+                            "You aren't got authorized or loaded with failed token!", Toast.LENGTH_SHORT).show();
+                }
+                        else {
+                            Toast.makeText(ViewYourReservationActivity.this,
+                                    response.code() + ": " + response.message(), Toast.LENGTH_SHORT).show();
+                        }
+                Loading.setLoading(ViewYourReservationActivity.this,false);
+            }
+            @Override
+            public void onFailure(Call<ReservationInformationDto[]> call, Throwable t) {
+                Toast.makeText(ViewYourReservationActivity.this, "Failed to load", Toast.LENGTH_SHORT).show();
+                Loading.setLoading(ViewYourReservationActivity.this,false);
+            }
+        });
+
+    }
+    public void init(){
+        recyclerView = findViewById(R.id.rv_listReservation);
+        userTitleText = findViewById(R.id.tv_userTitle);
+        userNameText = findViewById(R.id.tv_userName);
+        reservationHelloText = findViewById(R.id.tv_helloUserAtReservation);
+        reservationTitleText = findViewById(R.id.tv_reservationTitle);
+        addButton = findViewById(R.id.iv_addNewReservation);
+        backButton = findViewById(R.id.iv_rollBack);
+        viewMapButton = findViewById(R.id.iv_reservationMap);
+        viewNotificationButton = findViewById(R.id.iv_notification);
+        userAvatar = findViewById(R.id.iv_userAvatar);
+        userAvatar.setImageDrawable(getDrawable(R.drawable.quang_avatar));
+    }
+}
