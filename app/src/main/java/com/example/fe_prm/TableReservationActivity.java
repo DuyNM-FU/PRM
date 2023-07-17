@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.fe_prm.adapters.ButtonAdapter;
@@ -23,8 +25,13 @@ import org.joda.time.LocalDate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class TableReservationActivity extends AppCompatActivity {
@@ -32,6 +39,7 @@ public class TableReservationActivity extends AppCompatActivity {
     DayScrollDatePicker dpk_reserveDate;
     RecyclerView rv_NumOfPeople, rv_tableType, rv_reserveTime;
     ButtonAdapter numOfPeopleAdapter, tableTypeAdapter, reserveTimeAdapter;
+    Button btn_ReservationNext;
     DesiredReservation desiredReservationModel = new DesiredReservation();
 
     TextView tv_numOfPeople, tv_tableType, tv_reserveTime;
@@ -45,14 +53,15 @@ public class TableReservationActivity extends AppCompatActivity {
         LocalDate today = new LocalDate();
         dpk_reserveDate.setStartDate(today.getDayOfMonth(), today.getMonthOfYear(), today.getYear());
         dpk_reserveDate.getSelectedDate(date -> {
-            TextView tv_reserveDate = findViewById(R.id.tv_reserveDate);
-            tv_reserveDate.setText(date.toString());
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             // Format the date using the SimpleDateFormat object
             String formattedDate = dateFormat.format(date);
             desiredReservationModel.setDesiredDate(formattedDate);
             DisplayTimeSelection();
         });
+
+        btn_ReservationNext = findViewById(R.id.btn_ReservationNext);
+        btn_ReservationNext.setVisibility(View.GONE);
 
         tv_tableType = findViewById(R.id.tv_tableType);
         tv_reserveTime = findViewById(R.id.tv_reserveTime);
@@ -104,8 +113,7 @@ public class TableReservationActivity extends AppCompatActivity {
             add("8");
         }}, "numOfPeople");
         numOfPeopleAdapter.setOnOptionSelected(option -> {
-            desiredReservationModel.setSeat(Integer.parseInt(option.toString()));
-            tv_numOfPeople.setText(desiredReservationModel.getSeat() + "");
+            desiredReservationModel.setSeat(Integer.parseInt(option));
 
             DisplayTimeSelection();
         });
@@ -124,7 +132,6 @@ public class TableReservationActivity extends AppCompatActivity {
         tableTypeAdapter.setOnOptionSelected(option -> {
             boolean isPrivate = option.equals("Private");
             desiredReservationModel.setPrivate(isPrivate);
-            tv_tableType.setText(desiredReservationModel.getPrivate() + "");
 
             DisplayTimeSelection();
         });
@@ -147,12 +154,35 @@ public class TableReservationActivity extends AppCompatActivity {
                         && desiredReservationModel.getDesiredDate() != null
                         && desiredReservationModel.getSeat() != null;
 
+
         if (isEnoughProperty) {
-            List<VacantTable> vacantTables = BookingReservationRepo.getVacantTables(desiredReservationModel);
-            setVacantTimeListView(vacantTables);
+
+            Call<VacantTable[]> call = BookingReservationRepo.getBookingReservationService().getVacantTables(desiredReservationModel);
+            call.enqueue(new Callback<VacantTable[]>() {
+                @Override
+                public void onResponse(Call<VacantTable[]> call, Response<VacantTable[]> response) {
+                    List<VacantTable> vacantTables;
+                    VacantTable[] vacantResponse = response.body();
+                    if (vacantResponse == null) {
+                        return;
+                    }
+                    Log.i("API code", response.code()+"");
+                    Log.i("API message", response.message());
+
+
+                    vacantTables = new ArrayList<>(Arrays.asList(vacantResponse));
+                    setVacantTimeListView(vacantTables);
+                }
+
+                @Override
+                public void onFailure(Call<VacantTable[]> call, Throwable t) {
+                    Log.e("API Error", t.toString());
+                }
+            });
             tv_reserveTime.setVisibility(View.VISIBLE);
             rv_reserveTime.setVisibility(View.VISIBLE);
         }
+
     }
 
     private void setVacantTimeListView(List<VacantTable> vacantTables) {
@@ -162,12 +192,28 @@ public class TableReservationActivity extends AppCompatActivity {
         reserveTimeAdapter = new ButtonAdapter(availiableTimes, "reserveTime");
         reserveTimeAdapter.setOnOptionSelected(option -> {
             desiredReservationModel.setDesiredTime(option);
-            tv_reserveTime.setText(desiredReservationModel.getDesiredTime() + "");
+            displayNextButton();
         });
         rv_reserveTime.setAdapter(reserveTimeAdapter);
         rv_reserveTime.setLayoutManager(new LinearLayoutManager(
                 TableReservationActivity.this,
                 LinearLayoutManager.HORIZONTAL,
                 false));
+    }
+
+    private void displayNextButton() {
+        boolean isEnoughProperty =
+                desiredReservationModel.getPrivate() != null
+                        && desiredReservationModel.getDesiredDate() != null
+                        && desiredReservationModel.getSeat() != null;
+
+        boolean isReadyForNextPage = isEnoughProperty && desiredReservationModel.getDesiredTime() != null;
+
+        if (isReadyForNextPage) {
+            btn_ReservationNext.setVisibility(View.VISIBLE);
+            btn_ReservationNext.setOnClickListener(v -> {
+                // Implement Next page here
+            });
+        }
     }
 }
