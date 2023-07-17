@@ -11,13 +11,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fe_prm.R;
 
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.IntFunction;
 
-public class ButtonAdapter extends RecyclerView.Adapter<ButtonViewHolder> {
+public class ButtonAdapter<T> extends RecyclerView.Adapter<ButtonViewHolder> {
     private List<String> buttonNameList;
+    private String buttonPurpose;
+    private ButtonClickListener buttonClickListener;
+
+    public void setOnOptionSelected(ButtonClickListener buttonClickListener) {
+        this.buttonClickListener = buttonClickListener;
+    }
+
     private int selectedItemPosition = -1;
 
-    public ButtonAdapter(List<String> buttonNameList) {
+    public ButtonAdapter(List<String> buttonNameList, String buttonPurpose) {
         this.buttonNameList = buttonNameList;
+        this.buttonPurpose = buttonPurpose;
     }
 
     @NonNull
@@ -43,6 +53,7 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonViewHolder> {
             selectedItemPosition = holder.getAdapterPosition();
             notifyItemChanged(previousSelectedPosition);
             notifyItemChanged(selectedItemPosition);
+            buttonClickListener.onButtonClicked(buttonNameList.get(position));
         });
     }
 
@@ -51,4 +62,8 @@ public class ButtonAdapter extends RecyclerView.Adapter<ButtonViewHolder> {
         return buttonNameList.size();
     }
 
+    public interface ButtonClickListener {
+        void onButtonClicked(String buttonValue);
+    }
 }
+
