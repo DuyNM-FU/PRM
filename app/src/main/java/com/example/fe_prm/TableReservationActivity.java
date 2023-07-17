@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -82,6 +83,8 @@ public class TableReservationActivity extends AppCompatActivity {
         int selectedItem = item.getItemId();
         if (selectedItem == R.id.menu_location) {
             // Go to location activity
+            Intent intent = new Intent(TableReservationActivity.this, LocationsActivity.class);
+            startActivity(intent);
         }
         if (selectedItem == R.id.menu_reservations) {
             // Go to reservations activity
@@ -188,6 +191,7 @@ public class TableReservationActivity extends AppCompatActivity {
 
     private void setVacantTimeListView(List<VacantTable> vacantTables) {
         List<String> availiableTimes = vacantTables.stream()
+                .filter(s -> s.getAmount() > 0)
                 .map(VacantTable::getTime)
                 .collect(Collectors.toList());
         reserveTimeAdapter = new ButtonAdapter(availiableTimes, "reserveTime");
