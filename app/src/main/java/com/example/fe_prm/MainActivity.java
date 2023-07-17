@@ -33,7 +33,15 @@ public class MainActivity extends AppCompatActivity {
         tv_tittle = (TextView) findViewById(R.id.tv_tittle);
         tv_booknow = (TextView) findViewById(R.id.tv_booknow);
         tv_booknow.setText("Tired of having to wait?\nMake a reservation right away.");
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+
+        google_button = (SignInButton) findViewById(R.id.google_button);
+
+        google_button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
+        });
+
+        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
@@ -69,5 +77,6 @@ public class MainActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }*/
     }
 }

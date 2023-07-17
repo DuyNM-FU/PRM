@@ -1,7 +1,6 @@
 package com.example.fe_prm.view_your_reservation;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fe_prm.HomePage;
 import com.example.fe_prm.Loading;
 import com.example.fe_prm.MainActivity;
 import com.example.fe_prm.R;
@@ -48,19 +46,14 @@ public class ViewYourReservationActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_your_reservation);
+//        requestPermissions(new String[]{Re});
         init();
         renderRecyclerView();
-        setListener();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             recyclerView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                 recyclerView.setMinimumHeight(500);
             });
         }
-    }
-    public void setListener(){
-        backButton.setOnClickListener(v->{
-            startActivity(new Intent(this, MainActivity.class));
-        });
     }
     public void renderRecyclerView(){
         reservationDtos = new ArrayList<>();
@@ -80,21 +73,17 @@ public class ViewYourReservationActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ReservationInformationDto[]> call, Response<ReservationInformationDto[]> response) {
                 ReservationInformationDto[] dtos = response.body();
+                Log.d("TAG", "onResponse: OK " + response.body() + " dto: " + dtos.length);
                 if (dtos != null)
                     for (ReservationInformationDto dto:
                             dtos) {
                         reservationDtos.add(dto);
                         adapter.notifyDataSetChanged();
                         reservationTitleText.setText("Your reservations");
-                    } else
-                        if (response.code() == 401){
+                    } else {
                     Toast.makeText(ViewYourReservationActivity.this,
-                            "You aren't got authorized or loaded with failed token!", Toast.LENGTH_SHORT).show();
+                            "Load okey but ...", Toast.LENGTH_SHORT).show();
                 }
-                        else {
-                            Toast.makeText(ViewYourReservationActivity.this,
-                                    response.code() + ": " + response.message(), Toast.LENGTH_SHORT).show();
-                        }
                 Loading.setLoading(ViewYourReservationActivity.this,false);
             }
             @Override

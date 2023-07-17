@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,8 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FE_PRM"
         tools:targetApi="31">
-<!--        Activity for view own reservations-->
-        <activity android:name=".view_your_reservation.ViewYourReservationActivity"/>
+        <activity
+            android:name=".view_your_reservation.confirm.ConfirmReservation"
+            android:exported="false" />
+        <!-- Activity for view own reservations -->
+        <activity android:name=".view_your_reservation.ViewYourReservationActivity" />
         <activity
             android:name=".TableReservationActivity"
             android:exported="false" />
