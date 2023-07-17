@@ -60,14 +60,18 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, you can use the account details
             String idToken = account.getIdToken();
-            // ...
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
         } catch (ApiException e) {
             // Sign-in failed, handle error
             Log.e("LOGIN_ERROR", "signInResult:failed code=" + e.getStatusCode());
         }
     }
     private void signIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        //Remember to remove below comment to login with Google
+        Intent intent = new Intent(MainActivity.this, HomePage.class);
+        startActivity(intent);
+//        Intent signInIntent = googleSignInClient.getSignInIntent();
+//        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }
