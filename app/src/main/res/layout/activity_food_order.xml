@@ -27,19 +27,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/cartBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:contentDescription="TODO"
-                    app:backgroundTint="#F63333"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.952"
-                    app:layout_constraintStart_toEndOf="@+id/txt_FoodOrder"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/shopping_cart" />
-
                 <TextView
                     android:id="@+id/txt_FoodOrder"
                     android:layout_width="wrap_content"
@@ -53,15 +40,6 @@
                     android:textStyle="bold|italic"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/btn_Back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Back"
-                    app:layout_constraintBottom_toBottomOf="@+id/txt_FoodOrder"
-                    app:layout_constraintEnd_toStartOf="@+id/txt_FoodOrder"
-                    app:layout_constraintStart_toStartOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -90,10 +68,11 @@
 
                 <Button
                     android:id="@+id/btn_Next"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="90dp"
+                    android:layout_height="56dp"
                     android:layout_marginStart="304dp"
                     android:layout_marginTop="8dp"
+                    android:backgroundTint="#DD3737"
                     android:text="Next"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
@@ -129,6 +108,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/cartBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    app:backgroundTint="#F63333"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_Next"
+                    app:layout_constraintHorizontal_bias="0.713"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btn_Next"
+                    app:srcCompat="@drawable/shopping_cart" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
@@ -142,6 +134,20 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/fragment_toolbar2"
+            class="com.example.fe_prm.view_your_reservation.fragment.toolbar_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            tools:layout="@layout/toolbar_fragment" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
