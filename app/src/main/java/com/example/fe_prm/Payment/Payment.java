@@ -13,10 +13,15 @@ import android.widget.TextView;
 
 import com.example.fe_prm.ConfirmReservation.ConfirmReservation;
 import com.example.fe_prm.FoodOrder.Activity.CartListActivity;
+import com.example.fe_prm.FoodOrder.Domain.FoodDomain;
+import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
+import com.example.fe_prm.FoodOrder.Helper.ManagementCart;
 import com.example.fe_prm.MainActivity;
 import com.example.fe_prm.R;
 
 import org.json.JSONObject;
+
+import java.util.List;
 
 import vn.zalopay.sdk.Environment;
 import vn.zalopay.sdk.ZaloPayError;
@@ -47,6 +52,12 @@ public class Payment extends AppCompatActivity {
         iv_zlp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ManagementCart managementCart = new ManagementCart(Payment.this);
+                List<FoodDomain> cartList = managementCart.getListCart();
+
+                OrderDomain newCart = new OrderDomain(cartList, 1);
+
                 requestZaloPay();
             }
         });
