@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.example.fe_prm.ConfirmReservation.ConfirmReservation;
+import com.example.fe_prm.FoodOrder.FoodOrder;
+import com.example.fe_prm.Payment.Payment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,15 +36,7 @@ public class MainActivity extends AppCompatActivity {
         tv_tittle = (TextView) findViewById(R.id.tv_tittle);
         tv_booknow = (TextView) findViewById(R.id.tv_booknow);
         tv_booknow.setText("Tired of having to wait?\nMake a reservation right away.");
-
-        google_button = (SignInButton) findViewById(R.id.google_button);
-
-        google_button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, HomePage.class);
-            startActivity(intent);
-        });
-
-        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
@@ -68,15 +63,18 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, you can use the account details
             String idToken = account.getIdToken();
-            // ...
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
         } catch (ApiException e) {
             // Sign-in failed, handle error
             Log.e("LOGIN_ERROR", "signInResult:failed code=" + e.getStatusCode());
         }
     }
     private void signIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }*/
+        //Remember to remove below comment to login with Google
+        Intent intent = new Intent(MainActivity.this,  FoodOrder.class);
+        startActivity(intent);
+//        Intent signInIntent = googleSignInClient.getSignInIntent();
+//        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }

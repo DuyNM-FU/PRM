@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:androidzhost="http://schemas.android.com/apk/distribution">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET " />
 
     <application
         android:allowBackup="true"
@@ -13,17 +15,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FE_PRM"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view_your_reservation.confirm.ConfirmReservation"
-            android:exported="false" />
-        <!-- Activity for view own reservations -->
+            android:name=".Payment.Payment"
+            android:launchMode="singleTask"
+            android:exported="false">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="demozpdk" android:host="app" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ConfirmReservation.ConfirmReservation"
+            android:exported="false" /> <!-- Activity for view own reservations -->
         <activity android:name=".view_your_reservation.ViewYourReservationActivity" />
         <activity
             android:name=".TableReservationActivity"
             android:exported="false" />
         <activity
             android:name=".HomePage"
+            android:exported="false" />
+        <activity
+            android:name=".FoodOrder.Activity.CartListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FoodOrder.Activity.ShowDetailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -34,6 +53,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".FoodOrder.FoodOrder"
+            android:exported="false" />
     </application>
 
 </manifest>
