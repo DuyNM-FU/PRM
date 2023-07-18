@@ -5,9 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="40dp"
@@ -140,6 +138,19 @@
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="@+id/tv_reserveTime"
             app:layout_constraintTop_toBottomOf="@id/tv_reserveTime" />
+
+        <Button
+            android:id="@+id/btn_ReservationNext"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginTop="32dp"
+            android:text="Next"
+            android:backgroundTint="#1B1B20"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_reserveTime" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
