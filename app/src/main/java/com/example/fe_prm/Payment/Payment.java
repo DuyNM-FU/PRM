@@ -16,11 +16,14 @@ import com.example.fe_prm.FoodOrder.Activity.CartListActivity;
 import com.example.fe_prm.FoodOrder.Domain.FoodDomain;
 import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
 import com.example.fe_prm.FoodOrder.Helper.ManagementCart;
+import com.example.fe_prm.FoodOrder.Helper.TinyDB;
 import com.example.fe_prm.MainActivity;
 import com.example.fe_prm.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import vn.zalopay.sdk.Environment;
@@ -52,12 +55,25 @@ public class Payment extends AppCompatActivity {
         iv_zlp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TinyDB tinydb = new TinyDB(Payment.this);
                 ManagementCart managementCart = new ManagementCart(Payment.this);
                 List<FoodDomain> cartList = managementCart.getListCart();
 
-                OrderDomain newCart = new OrderDomain(cartList, 1);
+                ArrayList<OrderDomain> orderList = tinydb.getOrderList("OrderList");
+                Comparator<OrderDomain> comparator = Comparator.comparing( OrderDomain::getId );
 
+                OrderDomain newCart;
+                if(orderList.isEmpty()){
+                    newCart = new OrderDomain(cartList, 1);
+                }else {
+                    OrderDomain maxObject = orderList.stream().max(comparator).get();
+                    newCart = new OrderDomain(cartList, maxObject.getId()+1);
+                }
+                orderList.add(newCart);
+                tinydb.putListOrder("OrderList",orderList);
+                orderList = tinydb.getOrderList("OrderList");
+
+                tinydb.remove("CartList");
                 requestZaloPay();
             }
         });

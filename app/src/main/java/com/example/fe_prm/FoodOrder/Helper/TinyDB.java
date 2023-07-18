@@ -13,6 +13,7 @@ import android.util.Log;
 
 
 import com.example.fe_prm.FoodOrder.Domain.FoodDomain;
+import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -320,6 +321,19 @@ public class TinyDB {
         return playerList;
     }
 
+    public ArrayList<OrderDomain> getOrderList(String key){
+        Gson gson = new Gson();
+
+        ArrayList<String> objStrings = getListString(key);
+        ArrayList<OrderDomain> playerList =  new ArrayList<OrderDomain>();
+
+        for(String jObjString : objStrings){
+            OrderDomain player  = gson.fromJson(jObjString,  OrderDomain.class);
+            playerList.add(player);
+        }
+        return playerList;
+    }
+
 
 
     public <T> T getObject(String key, Class<T> classOfT){
@@ -474,6 +488,16 @@ public class TinyDB {
         Gson gson = new Gson();
         ArrayList<String> objStrings = new ArrayList<String>();
         for(FoodDomain player: playerList){
+            objStrings.add(gson.toJson(player));
+        }
+        putListString(key, objStrings);
+    }
+
+    public void putListOrder(String key, ArrayList<OrderDomain> playerList){
+        checkForNullKey(key);
+        Gson gson = new Gson();
+        ArrayList<String> objStrings = new ArrayList<String>();
+        for(OrderDomain player: playerList){
             objStrings.add(gson.toJson(player));
         }
         putListString(key, objStrings);

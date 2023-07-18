@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.fe_prm.ConfirmReservation.ConfirmReservation;
 import com.example.fe_prm.FoodOrder.Activity.CartListActivity;
 import com.example.fe_prm.FoodOrder.Adapter.CategoryAdapter;
 import com.example.fe_prm.FoodOrder.Adapter.PopularAdapter;
@@ -49,7 +50,7 @@ private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
                 startActivity(new Intent(FoodOrder.this, CartListActivity.class));
             }
             else {
-                startActivity(new Intent(FoodOrder.this, TableReservationActivity.class));
+                startActivity(new Intent(FoodOrder.this, ConfirmReservation.class));
             }
         });
     }
