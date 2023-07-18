@@ -16,7 +16,7 @@ public class item_selection_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.item_selection, container, false);
+        View view = inflater.inflate(R.layout.view_holder_item_selection, container, false);
         return view;
     }
 
