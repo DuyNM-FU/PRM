@@ -16,7 +16,7 @@ public class reservation_information_fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.reservation_information, container, false);
+        View view = inflater.inflate(R.layout.view_holder_reservation_information, container, false);
         return view;
     }
 
