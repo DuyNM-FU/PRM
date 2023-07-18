@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fe_prm.R;
 
 import java.util.List;
-import java.util.function.Function;
-import java.util.function.IntFunction;
 
 public class ButtonAdapter<T> extends RecyclerView.Adapter<ButtonViewHolder> {
     private List<String> buttonNameList;
@@ -36,7 +34,7 @@ public class ButtonAdapter<T> extends RecyclerView.Adapter<ButtonViewHolder> {
         Context context = parent.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        View view = layoutInflater.inflate(R.layout.item_selection, parent, false);
+        View view = layoutInflater.inflate(R.layout.view_holder_item_selection, parent, false);
 
         ButtonViewHolder viewHolder = new ButtonViewHolder(view);
 
