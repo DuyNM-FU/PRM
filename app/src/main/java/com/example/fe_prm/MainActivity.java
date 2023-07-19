@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.fe_prm.ConfirmReservation.ConfirmReservation;
 import com.example.fe_prm.FoodOrder.FoodOrder;
+import com.example.fe_prm.FoodOrder.Helper.TinyDB;
 import com.example.fe_prm.Payment.Payment;
 import com.example.fe_prm.view_your_reservation.ViewYourReservationActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, you can use the account details
             String idToken = account.getIdToken();
+            TinyDB tinyDB = new TinyDB(MainActivity.this);
+            tinyDB.putString("bearerKey", idToken);
             Intent intent = new Intent(MainActivity.this, HomePage.class);
             startActivity(intent);
         } catch (ApiException e) {
@@ -73,9 +76,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void signIn() {
         //Remember to remove below comment to login with Google
-        Intent intent = new Intent(MainActivity.this,  HomePage.class);
-        startActivity(intent);
-//        Intent signInIntent = googleSignInClient.getSignInIntent();
-//        startActivityForResult(signInIntent, RC_SIGN_IN);
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 }

@@ -16,10 +16,13 @@ import android.widget.Toast;
 
 import com.example.fe_prm.FoodOrder.Activity.CartListActivity;
 import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
+import com.example.fe_prm.FoodOrder.Helper.TinyDB;
 import com.example.fe_prm.Loading;
 import com.example.fe_prm.MainActivity;
 import com.example.fe_prm.Payment.Payment;
 import com.example.fe_prm.R;
+import com.example.fe_prm.TableReservationActivity;
+import com.example.fe_prm.models.DesiredReservation;
 import com.example.fe_prm.view_your_reservation.ViewYourReservationActivity;
 import com.example.fe_prm.view_your_reservation.api.ReservationRepository;
 import com.example.fe_prm.view_your_reservation.dto.ReservationInformationDto;
@@ -37,10 +40,12 @@ public class ConfirmReservation extends AppCompatActivity {
     ImageView iv_rollBack;
     TextView tv_orderFood;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_reservation);
+
         init();
         initControl();
     }
@@ -73,6 +78,10 @@ public class ConfirmReservation extends AppCompatActivity {
     }
 
     public void init(){
+        TinyDB tinyDB = new TinyDB(ConfirmReservation.this);
+        ArrayList<DesiredReservation> reservationList = tinyDB.getReservationObject("TableReservation");
+        DesiredReservation reservation = reservationList.get(reservationList.size()-1);
+
         btn_selection = findViewById(R.id.btn_selection);
         btn_selection.setText("CONFIRM RESERVATION");
         iv_rollBack = findViewById(R.id.iv_rollBack);

@@ -161,7 +161,9 @@ public class TableReservationActivity extends AppCompatActivity {
 
 
         if (isEnoughProperty) {
-            String tempJWT = "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImEzYmRiZmRlZGUzYmFiYjI2NTFhZmNhMjY3OGRkZThjMGIzNWRmNzYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODk3NDgzNDIsImF1ZCI6IjI0NzAyMjkwMDI3NS0zZWx0ZGtuMXZtYTIwbDNwcjYxamZudnBhNGs4Ymdlby5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwMTM3MTM4NjM2MjgyNzM1ODkxOCIsImVtYWlsIjoiZGF0bHQubWRjQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIyNDcwMjI5MDAyNzUtM2VsdGRrbjF2bWEyMGwzcHI2MWpmbnZwYTRrOGJnZW8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiVGjDoG5oIMSQ4bqhdCBMw6oiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUFjSFR0Y0dHUktIV0FNWnNwYlVFWjhVZ0FLMl9NY2tSbEVPem1uajM3eFZSZlN2dnc9czk2LWMiLCJnaXZlbl9uYW1lIjoiVGjDoG5oIMSQ4bqhdCIsImZhbWlseV9uYW1lIjoiTMOqIiwiaWF0IjoxNjg5NzQ4NjQyLCJleHAiOjE2ODk3NTIyNDIsImp0aSI6ImIwMTc5NzkwNDYyNzk4ODUzYzdmZDc1ZmE0MDdkZmM3NmIxZGU4MWYifQ.Tw8at0_wPy9pWo0vSasHHpAG0ZD9wwkFKOlXjFIYoC1fi-koUCjZEKoztM5ukaA06-KQl3wCYUh5_Nn93Yf94Z1EbsaBSeH1S4BVcQMY98JtgQQ3Y-hQuE_yXZqVlXF3e97ylnwrNmNO4GdKQbO2vJZuW-7aiyiaQvG0A95RzWIISDNRFfOw6yErloTlKrHc6ygkUD1e7BQCoh3gUDvr82NUUYX2KlnUzo_WtnX12ZC2u1nri_JxKMRlblSPKlg_hLZdb-wxI6iIFWCFDLxf_Lvlji7Ca3xEukQFFohRYIz9WgtgJ5gwEqC-pAn_cGJ43rVDoGzSFoMBStxJkNQo1g";
+            TinyDB tinyDB = new TinyDB(TableReservationActivity.this);
+            String tempJWT = "Bearer " +
+                    tinyDB.getString("bearerKey");
 
             Call<VacantTable[]> call = BookingReservationRepo.getBookingReservationService().getVacantTables(desiredReservationModel,tempJWT);
             call.enqueue(new Callback<VacantTable[]>() {

@@ -52,6 +52,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.6.0'
     implementation fileTree(dir: 'C:\\Users\\Vietann\\Downloads\\zalopay', include: ['*.aar', '*.jar'], exclude: [])
+    implementation fileTree(dir: 'D:\\Desktop\\my-material\\Ki 7\\PRM392\\Workspace\\PRM_Reservation_Restaurant\\app\\src', include: ['*.aar', '*.jar'], exclude: [])
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
