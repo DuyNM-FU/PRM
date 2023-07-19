@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void signIn() {
         //Remember to remove below comment to login with Google
-        Intent intent = new Intent(MainActivity.this,  HomePage.class);
+        Intent intent = new Intent(MainActivity.this,  FoodOrder.class);
         startActivity(intent);
 //        Intent signInIntent = googleSignInClient.getSignInIntent();
 //        startActivityForResult(signInIntent, RC_SIGN_IN);

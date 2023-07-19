@@ -76,9 +76,9 @@ public class Payment extends AppCompatActivity {
                 orderList.add(newCart);
                 tinydb.putListOrder("OrderList",orderList);
                 orderList = tinydb.getOrderList("OrderList");
-
-                tinydb.remove("CartList");
                 requestZaloPay();
+                tinydb.remove("CartList");
+
             }
         });
 

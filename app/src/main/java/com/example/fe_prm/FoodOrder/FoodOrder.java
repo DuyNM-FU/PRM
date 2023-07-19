@@ -87,9 +87,9 @@ private RecyclerView recyclerViewCategoryList, recyclerViewPopularList;
         recyclerViewPopularList.setLayoutManager(linearLayoutManager);
 
         ArrayList<FoodDomain> foodList = new ArrayList<>();
-        foodList.add(new FoodDomain("Hawaii Pizza", "pop_1", "Slices pepperoni, Mozzarella Cheese, fresh oregano, black pepper, sauce", 10.49));
-        foodList.add(new FoodDomain("American Buger", "pop_2", "Juicy Beef, Gouda Cheese, Hot Sauce, Tomato, Lettuce", 6.99));
-        foodList.add(new FoodDomain("Vegetable Pizza", "pop_3", "Olive oil, Vegetable oil, Cherry Tomato, Organic Protein", 11.89));
+        foodList.add(new FoodDomain("Hawaii Pizza", "pop_1", "Slices pepperoni, Mozzarella Cheese, fresh oregano, black pepper, sauce", 10000.00));
+        foodList.add(new FoodDomain("American Buger", "pop_2", "Juicy Beef, Gouda Cheese, Hot Sauce, Tomato, Lettuce", 7000.00));
+        foodList.add(new FoodDomain("Vegetable Pizza", "pop_3", "Olive oil, Vegetable oil, Cherry Tomato, Organic Protein", 20000.00));
 
         adapter2 = new PopularAdapter(foodList);
         recyclerViewPopularList.setAdapter(adapter2);
