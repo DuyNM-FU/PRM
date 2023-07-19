@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.example.fe_prm.FoodOrder.Domain.FoodDomain;
 import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
+import com.example.fe_prm.models.DesiredReservation;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -334,7 +335,18 @@ public class TinyDB {
         return playerList;
     }
 
+    public ArrayList<DesiredReservation> getReservationObject(String key){
+        Gson gson = new Gson();
 
+        ArrayList<String> objStrings = getListString(key);
+        ArrayList<DesiredReservation> playerList =  new ArrayList<DesiredReservation>();
+
+        for(String jObjString : objStrings){
+            DesiredReservation player  = gson.fromJson(jObjString,  DesiredReservation.class);
+            playerList.add(player);
+        }
+        return playerList;
+    }
 
     public <T> T getObject(String key, Class<T> classOfT){
 
@@ -498,6 +510,16 @@ public class TinyDB {
         Gson gson = new Gson();
         ArrayList<String> objStrings = new ArrayList<String>();
         for(OrderDomain player: playerList){
+            objStrings.add(gson.toJson(player));
+        }
+        putListString(key, objStrings);
+    }
+
+    public void putListReservation(String key, ArrayList<DesiredReservation> playerList){
+        checkForNullKey(key);
+        Gson gson = new Gson();
+        ArrayList<String> objStrings = new ArrayList<String>();
+        for(DesiredReservation player: playerList){
             objStrings.add(gson.toJson(player));
         }
         putListString(key, objStrings);
