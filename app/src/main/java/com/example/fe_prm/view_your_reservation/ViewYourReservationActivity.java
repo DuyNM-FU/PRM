@@ -53,6 +53,9 @@ public class ViewYourReservationActivity extends AppCompatActivity {
 //        requestPermissions(new String[]{Re});
         init();
         renderRecyclerView();
+        findViewById(R.id.ll_userInformation).setOnClickListener(v->{
+            startActivity(new Intent(this, ProfileActivity.class));
+        });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             recyclerView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                 recyclerView.setMinimumHeight(500);

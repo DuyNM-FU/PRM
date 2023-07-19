@@ -76,6 +76,13 @@ public class ConfirmReservation extends AppCompatActivity {
 
 
     }
+    public TextView tvTitle, tvDate, tvTime, tvTable, tvSeats, tvTableType, tvOrderFood;
+    public ImageView btEdit;
+
+    private Integer seat;
+    private Boolean isPrivate;
+    private String desiredDate;
+    private String desiredTime;
 
     public void init(){
         TinyDB tinyDB = new TinyDB(ConfirmReservation.this);
@@ -85,6 +92,22 @@ public class ConfirmReservation extends AppCompatActivity {
         btn_selection = findViewById(R.id.btn_selection);
         btn_selection.setText("CONFIRM RESERVATION");
         iv_rollBack = findViewById(R.id.iv_rollBack);
+        //----------------------------------------
+        tvTitle = findViewById(R.id.tv_reservationKey);
+        tvDate = findViewById(R.id.tv_date);
+        tvTime = findViewById(R.id.tv_time);
+        tvTable = findViewById(R.id.tv_table);
+        tvSeats = findViewById(R.id.tv_seat);
+        tvTableType = findViewById(R.id.tv_tableType);
+        tvOrderFood = findViewById(R.id.tv_orderFood);
+        //set data
+        tvOrderFood.setVisibility(View.GONE);
+        btEdit = findViewById(R.id.iv_edit);
+        tvSeats.setText(reservation.getSeat());
+        tvTableType.setText(reservation.getPrivate()==true?"Private":"Public");
+        tvDate.setText(reservation.getDesiredDate());
+        tvTime.setText(reservation.getDesiredTime());
+        //---------------------------------------
 
         tv_orderFood = findViewById(R.id.tv_orderFood);
         SpannableString id = new SpannableString("000001");
