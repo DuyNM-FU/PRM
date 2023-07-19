@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.fe_prm.FoodOrder.Activity.CartListActivity;
+import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
 import com.example.fe_prm.Loading;
 import com.example.fe_prm.MainActivity;
 import com.example.fe_prm.Payment.Payment;
@@ -23,6 +24,7 @@ import com.example.fe_prm.view_your_reservation.ViewYourReservationActivity;
 import com.example.fe_prm.view_your_reservation.api.ReservationRepository;
 import com.example.fe_prm.view_your_reservation.dto.ReservationInformationDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ConfirmReservation extends AppCompatActivity {
-
+    OrderDomain orderDomain;
     Button btn_selection;
     ImageView iv_rollBack;
     TextView tv_orderFood;
@@ -66,6 +68,8 @@ public class ConfirmReservation extends AppCompatActivity {
                 startActivity(cartIntent);
             }
         });
+
+
     }
 
     public void init(){

@@ -7,11 +7,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fe_prm.ConfirmReservation.ConfirmReservation;
+import com.example.fe_prm.Done.DoneActivity;
 import com.example.fe_prm.FoodOrder.Activity.CartListActivity;
 import com.example.fe_prm.FoodOrder.Domain.FoodDomain;
 import com.example.fe_prm.FoodOrder.Domain.OrderDomain;
@@ -34,8 +38,8 @@ import vn.zalopay.sdk.listeners.PayOrderListener;
 public class Payment extends AppCompatActivity {
     CartListActivity cartListActivity;
     ImageView iv_rollBack, iv_zlp;
-    TextView tv_price;
-    String price;
+    TextView tv_price, tv_next;
+    String price;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +89,20 @@ public class Payment extends AppCompatActivity {
                 startActivity(cartIntent);
             }
         });
+
         price = cartListActivity.CalculateCart2();
         tv_price.setText(price);
+
+        SpannableString txt = new SpannableString("Next");
+        txt.setSpan(new UnderlineSpan(), 0, txt.length(), 0);
+        tv_next.setText(txt);
+        tv_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Payment.this, DoneActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void requestZaloPay(){
@@ -158,6 +174,7 @@ public class Payment extends AppCompatActivity {
         iv_rollBack = findViewById(R.id.iv_rollBack);
         iv_zlp = findViewById(R.id.iv_zlp);
         tv_price = findViewById(R.id.tv_price);
+        tv_next = findViewById(R.id.tv_next);
     }
     @Override
     protected void onNewIntent(Intent intent) {
