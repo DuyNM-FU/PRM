@@ -24,7 +24,7 @@
         android:layout_marginTop="40dp"
         android:text="Confirm Reservation?"
         android:textColor="@color/white"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         class="com.example.fe_prm.view_your_reservation.fragment.reservation_information_fragment"
         app:layout_constraintTop_toBottomOf="@+id/tv_confirm"
-        tools:layout="@layout/reservation_information" />
+        tools:layout="@layout/view_holder_reservation_information" />
 
     <fragment
         android:id="@+id/fragment_btn_confirm"
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         class="com.example.fe_prm.view_your_reservation.fragment.item_selection_fragment"
         app:layout_constraintTop_toBottomOf="@+id/fragment_reserv_info"
-        tools:layout="@layout/item_selection" />
+        tools:layout="@layout/view_holder_item_selection" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
