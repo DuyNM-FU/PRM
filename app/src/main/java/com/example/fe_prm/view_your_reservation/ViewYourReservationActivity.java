@@ -1,9 +1,11 @@
 package com.example.fe_prm.view_your_reservation;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fe_prm.Loading;
 import com.example.fe_prm.MainActivity;
 import com.example.fe_prm.R;
+import com.example.fe_prm.TableReservationActivity;
+import com.example.fe_prm.profile.ProfileActivity;
 import com.example.fe_prm.view_your_reservation.adapter.ReservationRecycleViewAdapter;
 import com.example.fe_prm.view_your_reservation.api.ReservationRepository;
 import com.example.fe_prm.view_your_reservation.dto.ReservationInformationDto;
@@ -54,6 +58,14 @@ public class ViewYourReservationActivity extends AppCompatActivity {
                 recyclerView.setMinimumHeight(500);
             });
         }
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewYourReservationActivity.this, TableReservationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void renderRecyclerView(){
         reservationDtos = new ArrayList<>();
@@ -90,6 +102,14 @@ public class ViewYourReservationActivity extends AppCompatActivity {
             public void onFailure(Call<ReservationInformationDto[]> call, Throwable t) {
                 Toast.makeText(ViewYourReservationActivity.this, "Failed to load", Toast.LENGTH_SHORT).show();
                 Loading.setLoading(ViewYourReservationActivity.this,false);
+            }
+        });
+
+        userAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewYourReservationActivity.this, ProfileActivity.class);
+                startActivity(intent);
             }
         });
 
