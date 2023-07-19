@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
             // Signed in successfully, you can use the account details
             String idToken = account.getIdToken();
             TinyDB tinyDB = new TinyDB(MainActivity.this);
-            tinyDB.putString("bearerKey", idToken);
+            Log.i("TOken ", idToken);
+            tinyDB.putObject("bearerKey", idToken);
             Intent intent = new Intent(MainActivity.this, HomePage.class);
             startActivity(intent);
         } catch (ApiException e) {
