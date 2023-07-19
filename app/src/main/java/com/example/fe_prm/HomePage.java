@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class HomePage extends AppCompatActivity {
 
     TextView tv_wcback, tv_noreser;
-    ImageView img_home, img_add;
+    ImageView img_home, img_add, userAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
