@@ -64,7 +64,14 @@ public class TableReservationActivity extends AppCompatActivity {
         });
 
         btn_ReservationNext = findViewById(R.id.btn_ReservationNext);
-        btn_ReservationNext.setVisibility(View.GONE);
+        btn_ReservationNext.setVisibility(View.VISIBLE);
+        btn_ReservationNext.setOnClickListener(v -> {
+            TinyDB tinyDB = new TinyDB(TableReservationActivity.this);
+            ArrayList<DesiredReservation> reservationList = tinyDB.getReservationObject("TableReservation");
+            reservationList.add(desiredReservationModel);
+            tinyDB.putListReservation("TableReservation",reservationList);
+            startActivity(new Intent(TableReservationActivity.this, FoodOrder.class));
+        });
 
         tv_tableType = findViewById(R.id.tv_tableType);
         tv_reserveTime = findViewById(R.id.tv_reserveTime);
@@ -162,9 +169,8 @@ public class TableReservationActivity extends AppCompatActivity {
 
         if (isEnoughProperty) {
             TinyDB tinyDB = new TinyDB(TableReservationActivity.this);
-            String JWT = tinyDB.getString("bearerKey");
-            String tempJWT = "Bearer " +JWT.substring(1);
-
+            String tempJWT = "Bearer " +
+                    tinyDB.getString("bearerKey").substring(1);
 
             Call<VacantTable[]> call = BookingReservationRepo.getBookingReservationService().getVacantTables(desiredReservationModel,tempJWT);
             call.enqueue(new Callback<VacantTable[]>() {

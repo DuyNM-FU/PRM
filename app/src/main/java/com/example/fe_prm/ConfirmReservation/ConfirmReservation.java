@@ -87,7 +87,7 @@ public class ConfirmReservation extends AppCompatActivity {
     public void init(){
         TinyDB tinyDB = new TinyDB(ConfirmReservation.this);
         ArrayList<DesiredReservation> reservationList = tinyDB.getReservationObject("TableReservation");
-        DesiredReservation reservation = reservationList.get(reservationList.size()-1);
+        DesiredReservation reservation = reservationList.isEmpty()? null: reservationList.get(reservationList.size()-1);
 
         btn_selection = findViewById(R.id.btn_selection);
         btn_selection.setText("CONFIRM RESERVATION");
@@ -103,10 +103,10 @@ public class ConfirmReservation extends AppCompatActivity {
         //set data
         tvOrderFood.setVisibility(View.GONE);
         btEdit = findViewById(R.id.iv_edit);
-        tvSeats.setText(reservation.getSeat());
+        tvSeats.setText(reservation.getSeat()+"");
         tvTableType.setText(reservation.getPrivate()==true?"Private":"Public");
         tvDate.setText(reservation.getDesiredDate());
-        tvTime.setText(reservation.getDesiredTime());
+        //tvTime.setText(reservation.getDesiredTime());
         //---------------------------------------
 
         tv_orderFood = findViewById(R.id.tv_orderFood);
